@@ -98,12 +98,16 @@ script = ExtResource("1_wkjp0")
 
 [node name="Front" type="TextureRect" parent="."]
 layout_mode = 0
+offset_right = 258.0
+offset_bottom = 373.0
 scale = Vector2(0.5, 0.5)
 mouse_filter = 2
 texture = ExtResource("1_1awpt")
 
 [node name="Back" type="TextureRect" parent="."]
 layout_mode = 0
+offset_right = 256.0
+offset_bottom = 372.0
 scale = Vector2(0.5, 0.5)
 mouse_filter = 2
 texture = ExtResource("2_shu33")

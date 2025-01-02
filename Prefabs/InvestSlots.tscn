@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://cdnnth03qc7fy"]
+
+[ext_resource type="PackedScene" uid="uid://dpx732ntvmqdr" path="res://Prefabs/InvestSlot.tscn" id="1_kwndk"]
+[ext_resource type="Script" path="res://Scripts/InvestSlots.gd" id="1_s1byf"]
+
+[node name="InvestSlots" type="HBoxContainer"]
+offset_left = 303.0
+offset_top = 208.0
+offset_right = 1654.0
+offset_bottom = 595.0
+script = ExtResource("1_s1byf")
+
+[node name="InvestSlot" parent="." instance=ExtResource("1_kwndk")]
+layout_mode = 2
+
+[node name="InvestSlot2" parent="." instance=ExtResource("1_kwndk")]
+layout_mode = 2
+
+[node name="InvestSlot3" parent="." instance=ExtResource("1_kwndk")]
+layout_mode = 2
+
+[node name="InvestSlot4" parent="." instance=ExtResource("1_kwndk")]
+layout_mode = 2
+
+[node name="InvestSlot5" parent="." instance=ExtResource("1_kwndk")]
+layout_mode = 2

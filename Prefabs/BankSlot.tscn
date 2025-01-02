@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://eop62t8g4wrm"]
+
+[ext_resource type="Texture2D" uid="uid://c0adl0m2rjcdq" path="res://Art/Cards/BankSlot.png" id="1_w7fux"]
+
+[node name="BankSlot" type="TextureRect"]
+texture = ExtResource("1_w7fux")

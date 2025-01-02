@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpx732ntvmqdr"]
+
+[ext_resource type="Texture2D" uid="uid://c1o382kisobmw" path="res://Art/Cards/InvestSlot.png" id="1_lqsov"]
+[ext_resource type="Script" path="res://Scripts/InvestSlot.gd" id="2_8133v"]
+
+[node name="InvestSlot" type="TextureRect"]
+custom_minimum_size = Vector2(50, 50)
+texture = ExtResource("1_lqsov")
+expand_mode = 3
+stretch_mode = 5
+script = ExtResource("2_8133v")

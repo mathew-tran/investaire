@@ -1,18 +1,32 @@
-extends Node2D
+extends Control
+
+class_name Deck
 
 var Duplicates = 4
 
-func _ready():
-	CreateDeck()
+signal DeckCreated
 	
 func CreateDeck():
-	var cardOffset = Vector2.ZERO
+	var data = []
 	for dupe in Duplicates:
-			for x in range(0, 9):
-				var instance = load("res://Prefabs/Card.tscn").instantiate()
-				
-				$Cards.add_child(instance)
-				instance.global_position = $Cards.global_position + cardOffset
-				cardOffset += Vector2(-1,-1)
-		
-	$Cards.get_child(len($Cards.get_children())-1).Flip()
+		for x in range(0, 9):
+			data.append(x)
+	data.shuffle()
+	
+	var cardOffset = Vector2.ZERO
+	for card in data:
+		var instance = load("res://Prefabs/Card.tscn").instantiate()		
+		instance.Rank = card
+		$Cards.add_child(instance)
+		instance.global_position = Vector2(-400, 0)
+		await instance.Move($Cards.global_position + cardOffset, randf_range(.1, .11))
+		cardOffset += Vector2(-1,-1.2)
+	
+	DeckCreated.emit()
+
+func DrawCard(newContainer):
+	var newCard = $Cards.get_child(len($Cards.get_children()) -1)
+	newCard.reparent(newContainer)
+	await newCard.Move(newContainer.global_position)
+	newCard.Flip()
+	return newCard

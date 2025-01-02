@@ -3,7 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://cxbxkrrbg84vh" path="res://Art/Cards/DeckSlot.png" id="1_fhrvv"]
 [ext_resource type="Script" path="res://Scripts/Deck.gd" id="1_j0lq4"]
 
-[node name="Deck" type="Node2D"]
+[node name="Deck" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_j0lq4")
 
 [node name="SlotImage" type="TextureRect" parent="."]
@@ -12,4 +14,5 @@ offset_bottom = 387.0
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_fhrvv")
 
-[node name="Cards" type="Node2D" parent="."]
+[node name="Cards" type="Control" parent="."]
+anchors_preset = 0
