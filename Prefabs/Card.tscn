@@ -1,0 +1,115 @@
+[gd_scene load_steps=7 format=3 uid="uid://csllrtwsiqyil"]
+
+[ext_resource type="Texture2D" uid="uid://j1vqyi5ja8rp" path="res://Art/Cards/0.png" id="1_1awpt"]
+[ext_resource type="Script" path="res://Scripts/Card.gd" id="1_wkjp0"]
+[ext_resource type="Texture2D" uid="uid://o3q2wwf22km5" path="res://Art/Cards/Back.png" id="2_shu33"]
+
+[sub_resource type="Animation" id="Animation_hbep6"]
+resource_name = "FlipFront"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Back:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Front:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.566667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.566667, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1e-05, 1), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_xqb8e"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Back:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Front:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ymb0o"]
+_data = {
+"FlipFront": SubResource("Animation_hbep6"),
+"RESET": SubResource("Animation_xqb8e")
+}
+
+[node name="Card" type="Button"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(130, 186)
+offset_right = 130.0
+offset_bottom = 186.0
+pivot_offset = Vector2(65, 0)
+script = ExtResource("1_wkjp0")
+
+[node name="Front" type="TextureRect" parent="."]
+layout_mode = 0
+scale = Vector2(0.5, 0.5)
+mouse_filter = 2
+texture = ExtResource("1_1awpt")
+
+[node name="Back" type="TextureRect" parent="."]
+layout_mode = 0
+scale = Vector2(0.5, 0.5)
+mouse_filter = 2
+texture = ExtResource("2_shu33")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ymb0o")
+}
+speed_scale = 2.0

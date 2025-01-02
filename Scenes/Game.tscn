@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cg224uu0mwtht"]
+
+[ext_resource type="PackedScene" uid="uid://cwv3t38xas85y" path="res://Prefabs/Deck.tscn" id="1_tu6hs"]
+
+[node name="Node2D" type="Node2D"]
+position = Vector2(91, 204)
+
+[node name="Deck" parent="." instance=ExtResource("1_tu6hs")]
