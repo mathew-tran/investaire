@@ -24,6 +24,13 @@ func Flip():
 func ReverseFlip():
 	$AnimationPlayer.play("FlipBack", -1, 4.8)
 	
+func Kill():
+	var pointAmount = Rank
+	if Rank == 0:
+		pointAmount += 10
+	Finder.GetGame().GainPoints(pointAmount)
+	queue_free()
+	
 	
 	
 func Move(newPosition, speed = .1, transType = Tween.TransitionType.TRANS_LINEAR):

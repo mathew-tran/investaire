@@ -15,6 +15,10 @@ var GameState = GAME_STATE.START
 
 signal CardMoved
 
+var Points = 0
+
+signal PointsGained(amount)
+
 func _ready():
 	await $Deck.CreateDeck()
 	print("ready")
@@ -33,6 +37,12 @@ func _ready():
 
 func GetPlayCard():
 	return $PlaySlot.get_child(0)
+	
+func GainPoints(amount):
+	Points += amount
+	await get_tree().create_timer(.1).timeout
+	PointsGained.emit(amount)
+	
 	
 func PopulateInvestSlots():
 	while $InvestSlots.AreSlotsVacant():

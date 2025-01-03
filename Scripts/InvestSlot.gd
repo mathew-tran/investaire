@@ -46,7 +46,7 @@ func TakeCard(card : Card):
 			children.ReverseFlip()
 			await get_tree().create_timer(.8).timeout
 			await children.Move(Vector2(2200, -100), .1, Tween.TransitionType.TRANS_CUBIC)
-			children.queue_free()
+			children.Kill()
 	await get_tree().process_frame
 	
 func RepositionCards():
