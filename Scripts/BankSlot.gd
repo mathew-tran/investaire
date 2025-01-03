@@ -6,13 +6,35 @@ class_name BankSlot
 func TakeCard(card : Card):
 	card.reparent(CardHolder)
 	await CardHolder.NOTIFICATION_CHILD_ORDER_CHANGED
+	await SortCards()
 	await RepositionCards()
 	await CheckDupes()
 	await RepositionCards()
-	await get_tree().create_timer(.1).timeout
+	await get_tree().process_frame
 	if len(CardHolder.get_children()) >= 3:
 		Finder.GetGame().KillGame()
 	
+func CompareCards(cardA : Card, cardB : Card):
+	if cardA.Rank <= cardB.Rank:
+		return true
+	return false
+	
+func SortCards():
+	var cards = []
+	for card in CardHolder.get_children():
+		cards.append(card)
+		
+	cards.sort_custom(CompareCards)
+	
+	for card in cards:
+		card.reparent(Finder.GetDeadCardGroup())
+		await CardHolder.NOTIFICATION_CHILD_ORDER_CHANGED
+	
+	for card in cards:
+		card.reparent(CardHolder)
+		await CardHolder.NOTIFICATION_CHILD_ORDER_CHANGED
+		
+		
 func CheckDupes():
 	var values = {}
 	for card in CardHolder.get_children():
@@ -36,7 +58,7 @@ func RepositionCards():
 	var cardOffset = Vector2.ZERO
 	var startPosition = CardHolder.global_position + Vector2(30.5, 0)
 	print(startPosition)
-	var speed = .1 / CardHolder.get_child_count()
+	var speed = .08 / CardHolder.get_child_count()
 	var cards = CardHolder.get_children()
 	for card in cards:		
 		card.z_index = 0

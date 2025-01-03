@@ -18,22 +18,13 @@ func SortCards():
 		
 	cards.sort_custom(CompareCards)
 	
-	print("sorting:" + name)
 	for card in cards:
 		card.reparent(Finder.GetDeadCardGroup())
 		await CardHolder.NOTIFICATION_CHILD_ORDER_CHANGED
 	
-	
 	for card in cards:
 		card.reparent(CardHolder)
 		await CardHolder.NOTIFICATION_CHILD_ORDER_CHANGED
-
-	print("Attempted sort")
-	for card in CardHolder.get_children():
-		print(str(card.Rank))
-	
-	
-	print("======")
 		
 	
 func CompareCards(cardA : Card, cardB : Card):
