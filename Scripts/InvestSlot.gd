@@ -6,7 +6,7 @@ var bActivated = false
 
 @onready var CardHolder = $Cards
 
-var MaxCardAmount = 4
+var MaxCardAmount = 5
 
 func IsEmpty():
 	return CardHolder.get_child_count() == 0
@@ -34,7 +34,7 @@ func TakeCard(card : Card):
 	await get_tree().process_frame
 	
 	await RepositionCards()	
-	if CardHolder.get_child_count() == 4:
+	if CardHolder.get_child_count() == MaxCardAmount:
 		await get_tree().create_timer(1).timeout
 		var deadCards = []
 		for deadcard in CardHolder.get_children():
