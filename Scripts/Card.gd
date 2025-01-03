@@ -32,11 +32,11 @@ func ReverseFlip():
 func Kill(killReason = KILL_REASON.DEFAULT):
 	reparent(Finder.GetDeadCardGroup())
 	var tween = get_tree().create_tween()
-	tween.tween_property(self, "scale", Vector2.ONE * 1.5, .2)
+	tween.tween_property(self, "scale", Vector2.ONE * 1.5, .1)
 	tween.set_trans(Tween.TRANS_CUBIC)
 	await tween.finished
 	tween = get_tree().create_tween()
-	tween.tween_property(self, "scale", Vector2.ONE, .1)
+	tween.tween_property(self, "scale", Vector2.ONE, .05)
 	await tween.finished
 	
 	ReverseFlip()

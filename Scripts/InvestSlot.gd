@@ -11,31 +11,37 @@ var MaxCardAmount = 5
 func IsEmpty():
 	return CardHolder.get_child_count() == 0
 
+func SortCards():
+	var cards = []
+	for card in CardHolder.get_children():
+		cards.append(card)
+		
+	cards.sort_custom(CompareCards)
+	
+	print("sorting:" + name)
+	for card in cards:
+		print(str(card.Rank))
+		CardHolder.move_child(card, 0)
+		await CardHolder.NOTIFICATION_CHILD_ORDER_CHANGED
+		await get_tree().process_frame
+		await get_tree().process_frame
+	
+	print("======")
+		
+	
+func CompareCards(cardA : Card, cardB : Card):
+	if cardA.Rank <= cardB.Rank:
+		return true
+	return false
+	
 func TakeCard(card : Card):
 	var bMoveToTop = false
 	card.reparent(CardHolder)
-	await get_tree().process_frame
-	if len(CardHolder.get_children()) == 1:		
-		if card.Rank > CardHolder.get_child(0).Rank:
-			bMoveToTop = true
-		
-
-	elif len(CardHolder.get_children()) > 1:
-		if card.Rank in CardHolder.get_child(0).GetAllowableNumbers(Card.CARD_POSITION.TOP):
-			if card.Rank >= CardHolder.get_child(0).Rank:
-				bMoveToTop = true
-			
-			
-	if bMoveToTop:
-		CardHolder.move_child(card, 0)
-	else:
-		CardHolder.move_child(card, -1)
-			
-	await get_tree().process_frame
-	
+	await CardHolder.NOTIFICATION_CHILD_ORDER_CHANGED
+	await SortCards()	
 	await RepositionCards()	
 	if CardHolder.get_child_count() == MaxCardAmount:
-		await get_tree().create_timer(.5).timeout
+		await get_tree().create_timer(.4).timeout
 		var deadCards = []
 		for deadcard in CardHolder.get_children():
 			deadCards.append(deadcard)
@@ -43,18 +49,18 @@ func TakeCard(card : Card):
 		
 		for children in deadCards:
 			await children.Kill()
-	await get_tree().process_frame
+			await CardHolder.NOTIFICATION_CHILD_ORDER_CHANGED
 	
 func RepositionCards():
 	if CardHolder.get_child_count() < 2:
 		return
 	var cardOffset = Vector2.ZERO
+	await get_tree().create_timer(.1).timeout
 	var cards = CardHolder.get_children()
 	for card in cards:
 		if card.global_position != CardHolder.global_position + cardOffset:
 			await card.Move(CardHolder.global_position + cardOffset, .01, Tween.TransitionType.TRANS_QUAD)
-		card.z_index = 0
-		cardOffset.y += 35
+		cardOffset.y += 55
 		cardOffset.x -= 3.5
 	pass
 

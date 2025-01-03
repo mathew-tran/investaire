@@ -19,22 +19,32 @@ var Points = 0
 
 signal PointsGained(amount)
 
+var bIsGameOver = false
+
 func _ready():
 	await $Deck.CreateDeck()
 	print("ready")
 	
 	
-	while $Deck.IsEmpty() == false:
+	while $Deck.IsEmpty() == false and bIsGameOver == false:
 		await PopulateInvestSlots()
 		await PopulatePlaySlot()
+		if is_instance_valid(GetPlayCard()) == false:
+			break
 		await $InvestSlots.UpdateSlots(GetPlayCard())
 		if $InvestSlots.AreAnySlotsActive() == false:
 			await $BankSlot.TakeCard(GetPlayCard())
 		else:
 			await CardMoved
 			
-	print("update")
+		await get_tree().create_timer(.2).timeout
+	
+	$CanvasLayer/GameOver.Show()
 
+func KillGame():
+	bIsGameOver = true
+	$InvestSlots.DisableSlots()	
+	
 func GetPlayCard():
 	return $PlaySlot.get_child(0)
 	
@@ -48,11 +58,15 @@ func PopulateInvestSlots():
 	while $InvestSlots.AreSlotsVacant():
 		await get_tree().create_timer(.2).timeout
 		var slot = $InvestSlots.GetNextVacantSlot()
-		await $Deck.DrawCard(slot.GetHolder())
+		if $Deck.IsEmpty() == false:
+			await $Deck.DrawCard(slot.GetHolder())
+		else:
+			break
 
 func PopulatePlaySlot():
 	await get_tree().create_timer(.3).timeout
-	await $Deck.DrawCard($PlaySlot)
+	if $Deck.IsEmpty() == false:
+		await $Deck.DrawCard($PlaySlot)
 
 func OnSlotPressed(slot):
 	$InvestSlots.DisableSlots()	

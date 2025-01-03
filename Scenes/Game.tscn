@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cg224uu0mwtht"]
+[gd_scene load_steps=16 format=3 uid="uid://cg224uu0mwtht"]
 
 [ext_resource type="PackedScene" uid="uid://bqk8vp2wny8xq" path="res://Prefabs/BankSlot.tscn" id="1_48mkt"]
 [ext_resource type="PackedScene" uid="uid://cwv3t38xas85y" path="res://Prefabs/Deck.tscn" id="1_tu6hs"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://Scripts/Points.gd" id="5_jxug2"]
 [ext_resource type="Texture2D" uid="uid://3n1f4pf7dr3j" path="res://Art/BG3.png" id="6_20m51"]
 [ext_resource type="Texture2D" uid="uid://belnqdl5gg2nx" path="res://Art/BG4.png" id="6_hod4n"]
+[ext_resource type="PackedScene" uid="uid://2716lq2baj5t" path="res://Prefabs/GameOverScreen.tscn" id="15_dq3aa"]
 
 [node name="Game" type="Node2D" groups=["Game"]]
 position = Vector2(91, 204)
@@ -21,10 +22,10 @@ script = ExtResource("1_v4ve5")
 
 [node name="ScoredSlot" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(133.5, 186.5)
-offset_left = 873.0
-offset_top = -184.0
-offset_right = 1073.0
-offset_bottom = 6.0
+offset_left = 1140.0
+offset_top = -327.0
+offset_right = 1340.0
+offset_bottom = -137.0
 texture = ExtResource("2_yf4c5")
 expand_mode = 2
 stretch_mode = 4
@@ -74,15 +75,23 @@ script = ExtResource("5_jxug2")
 [node name="TextureRect" type="TextureRect" parent="."]
 show_behind_parent = true
 custom_minimum_size = Vector2(2560, 1080)
-offset_left = -103.0
-offset_top = -221.0
-offset_right = 2457.0
-offset_bottom = 1279.0
-scale = Vector2(0.5, 0.5)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -752.0
+offset_top = -575.0
+offset_right = 1808.0
+offset_bottom = 925.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.75, 0.75)
+pivot_offset = Vector2(1280, 750)
 texture = ExtResource("2_154ev")
 expand_mode = 2
 stretch_mode = 5
-metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="TextureRect" type="TextureRect" parent="TextureRect"]
 show_behind_parent = true
@@ -198,40 +207,50 @@ stretch_mode = 4
 metadata/_edit_lock_ = true
 
 [node name="BankSlot" parent="." instance=ExtResource("1_48mkt")]
-offset_left = 928.0
-offset_top = 11.0
-offset_right = 1068.0
-offset_bottom = 201.0
+offset_left = 1146.0
+offset_top = -79.0
+offset_right = 1286.0
+offset_bottom = 111.0
+scale = Vector2(1.5, 1.5)
 
 [node name="InvestSlots" parent="." instance=ExtResource("2_y6qob")]
-offset_left = 7.0
-offset_top = 11.0
-offset_right = 837.0
-offset_bottom = 204.0
+offset_left = -266.0
+offset_top = -76.0
+offset_right = 564.0
+offset_bottom = 117.0
+scale = Vector2(1.5, 1.5)
 alignment = 1
 
 [node name="Deck" parent="." instance=ExtResource("1_tu6hs")]
-offset_left = 959.0
-offset_top = 317.0
-offset_right = 959.0
-offset_bottom = 317.0
+offset_left = 1146.0
+offset_top = 385.0
+offset_right = 1146.0
+offset_bottom = 385.0
+scale = Vector2(1.5, 1.5)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(550, 157)
-zoom = Vector2(1.5, 1.5)
+metadata/_edit_lock_ = true
 
 [node name="DeadCard" type="Control" parent="." groups=["DeadCard"]]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+scale = Vector2(1.5, 1.5)
 
 [node name="PlaySlot" type="TextureRect" parent="."]
-offset_left = 309.0
-offset_top = 389.0
-offset_right = 449.0
-offset_bottom = 579.0
+offset_left = 253.0
+offset_top = 471.0
+offset_right = 393.0
+offset_bottom = 661.0
+scale = Vector2(1.5, 1.5)
 pivot_offset = Vector2(-10, -10)
 texture = ExtResource("3_glwnt")
 expand_mode = 3
 stretch_mode = 5
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GameOver" parent="CanvasLayer" instance=ExtResource("15_dq3aa")]
+visible = false
