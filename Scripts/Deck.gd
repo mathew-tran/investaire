@@ -20,7 +20,7 @@ func CreateDeck():
 		instance.Rank = card
 		$Cards.add_child(instance)
 		instance.global_position = Vector2(-400, 0)
-		await instance.Move($Cards.global_position + cardOffset, .08)
+		await instance.Move($Cards.global_position + cardOffset, .05)
 		cardOffset += Vector2(-1,-1.2)
 	
 	DeckCreated.emit()
@@ -28,7 +28,7 @@ func CreateDeck():
 func DrawCard(newContainer):
 	var newCard = $Cards.get_child(len($Cards.get_children()) -1)
 	newCard.reparent(newContainer)
-	await newCard.Move(newContainer.global_position, .2)
+	await newCard.Move(newContainer.global_position, .1)
 	newCard.Flip()
 	return newCard
 

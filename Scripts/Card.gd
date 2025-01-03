@@ -11,6 +11,11 @@ enum CARD_POSITION {
 	MIDDLE,
 	BOTTOM
 }
+
+enum KILL_REASON {
+	DEFAULT,
+	BANK
+}
 func _ready():
 	Create()
 	
@@ -24,10 +29,25 @@ func Flip():
 func ReverseFlip():
 	$AnimationPlayer.play("FlipBack", -1, 4.8)
 	
-func Kill():
+func Kill(killReason = KILL_REASON.DEFAULT):
+	reparent(Finder.GetDeadCardGroup())
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, "scale", Vector2.ONE * 1.5, .2)
+	tween.set_trans(Tween.TRANS_CUBIC)
+	await tween.finished
+	tween = get_tree().create_tween()
+	tween.tween_property(self, "scale", Vector2.ONE, .1)
+	await tween.finished
+	
+	ReverseFlip()
+	await get_tree().create_timer(.5).timeout
+	await Move(Vector2(2200, -100), .1, Tween.TransitionType.TRANS_CUBIC)
 	var pointAmount = Rank
 	if Rank == 0:
 		pointAmount += 10
+		
+	if killReason == KILL_REASON.BANK:
+		pointAmount *= 3
 	Finder.GetGame().GainPoints(pointAmount)
 	queue_free()
 	
@@ -42,6 +62,7 @@ func Move(newPosition, speed = .1, transType = Tween.TransitionType.TRANS_LINEAR
 	await tween.finished
 	MoveComplete.emit()
 	reparent(oldParent)
+	await get_tree().process_frame
 
 func GetAllowableNumbers(cardPosition: CARD_POSITION):
 	var allowedNumbers = []

@@ -29,7 +29,7 @@ func _ready():
 		await PopulatePlaySlot()
 		await $InvestSlots.UpdateSlots(GetPlayCard())
 		if $InvestSlots.AreAnySlotsActive() == false:
-			$BankSlot.TakeCard(GetPlayCard())
+			await $BankSlot.TakeCard(GetPlayCard())
 		else:
 			await CardMoved
 			

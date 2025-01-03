@@ -35,18 +35,14 @@ func TakeCard(card : Card):
 	
 	await RepositionCards()	
 	if CardHolder.get_child_count() == MaxCardAmount:
-		await get_tree().create_timer(1).timeout
+		await get_tree().create_timer(.5).timeout
 		var deadCards = []
 		for deadcard in CardHolder.get_children():
 			deadCards.append(deadcard)
 		deadCards.reverse()
 		
 		for children in deadCards:
-			children.reparent(Finder.GetDeadCardGroup())
-			children.ReverseFlip()
-			await get_tree().create_timer(.8).timeout
-			await children.Move(Vector2(2200, -100), .1, Tween.TransitionType.TRANS_CUBIC)
-			children.Kill()
+			await children.Kill()
 	await get_tree().process_frame
 	
 func RepositionCards():
@@ -56,7 +52,7 @@ func RepositionCards():
 	var cards = CardHolder.get_children()
 	for card in cards:
 		if card.global_position != CardHolder.global_position + cardOffset:
-			await card.Move(CardHolder.global_position + cardOffset, .1, Tween.TransitionType.TRANS_QUAD)
+			await card.Move(CardHolder.global_position + cardOffset, .01, Tween.TransitionType.TRANS_QUAD)
 		card.z_index = 0
 		cardOffset.y += 35
 		cardOffset.x -= 3.5

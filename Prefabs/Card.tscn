@@ -133,7 +133,7 @@ self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(130, 186)
 offset_right = 130.0
 offset_bottom = 186.0
-pivot_offset = Vector2(65, 0)
+pivot_offset = Vector2(65, 93)
 script = ExtResource("1_wkjp0")
 
 [node name="Front" type="TextureRect" parent="."]
