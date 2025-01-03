@@ -1,6 +1,8 @@
 extends Label
 
 var Total = 0
+
+
 func _ready():
 	Finder.GetGame().PointsGained.connect(OnPointsGained)
 	OnPointsGained(0)

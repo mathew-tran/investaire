@@ -20,26 +20,35 @@ func SortCards():
 	
 	print("sorting:" + name)
 	for card in cards:
-		print(str(card.Rank))
-		CardHolder.move_child(card, 0)
+		card.reparent(Finder.GetDeadCardGroup())
 		await CardHolder.NOTIFICATION_CHILD_ORDER_CHANGED
-		await get_tree().process_frame
-		await get_tree().process_frame
+	
+	
+	for card in cards:
+		card.reparent(CardHolder)
+		await CardHolder.NOTIFICATION_CHILD_ORDER_CHANGED
+
+	print("Attempted sort")
+	for card in CardHolder.get_children():
+		print(str(card.Rank))
+	
 	
 	print("======")
 		
 	
 func CompareCards(cardA : Card, cardB : Card):
-	if cardA.Rank <= cardB.Rank:
+	if cardA.Rank >= cardB.Rank:
 		return true
 	return false
 	
 func TakeCard(card : Card):
 	var bMoveToTop = false
 	card.reparent(CardHolder)
+	card.visible = false
 	await CardHolder.NOTIFICATION_CHILD_ORDER_CHANGED
 	await SortCards()	
 	await RepositionCards()	
+	card.visible = true
 	if CardHolder.get_child_count() == MaxCardAmount:
 		await get_tree().create_timer(.4).timeout
 		var deadCards = []
@@ -58,8 +67,7 @@ func RepositionCards():
 	await get_tree().create_timer(.1).timeout
 	var cards = CardHolder.get_children()
 	for card in cards:
-		if card.global_position != CardHolder.global_position + cardOffset:
-			await card.Move(CardHolder.global_position + cardOffset, .01, Tween.TransitionType.TRANS_QUAD)
+		await card.Move(CardHolder.global_position + cardOffset, .01, Tween.TransitionType.TRANS_QUAD)
 		cardOffset.y += 55
 		cardOffset.x -= 3.5
 	pass

@@ -36,8 +36,9 @@ func _ready():
 			await $BankSlot.TakeCard(GetPlayCard())
 		else:
 			await CardMoved
-			
-		await get_tree().create_timer(.2).timeout
+		
+		await get_tree().create_timer(1.2).timeout
+		
 	
 	$CanvasLayer/GameOver.Show()
 
