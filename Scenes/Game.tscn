@@ -205,7 +205,7 @@ offset_bottom = 201.0
 [node name="InvestSlots" parent="." instance=ExtResource("2_y6qob")]
 offset_left = 7.0
 offset_top = 11.0
-offset_right = 762.0
+offset_right = 837.0
 offset_bottom = 204.0
 alignment = 1
 

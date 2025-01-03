@@ -45,7 +45,7 @@ func TakeCard(card : Card):
 			children.reparent(Finder.GetDeadCardGroup())
 			children.ReverseFlip()
 			await get_tree().create_timer(.8).timeout
-			await children.Move(Vector2(2500, 0), .2)
+			await children.Move(Vector2(2200, -100), .1, Tween.TransitionType.TRANS_CUBIC)
 			children.queue_free()
 	await get_tree().process_frame
 	
@@ -56,10 +56,10 @@ func RepositionCards():
 	var cards = CardHolder.get_children()
 	for card in cards:
 		if card.global_position != CardHolder.global_position + cardOffset:
-			await card.Move(CardHolder.global_position + cardOffset, .2)
+			await card.Move(CardHolder.global_position + cardOffset, .1, Tween.TransitionType.TRANS_QUAD)
 		card.z_index = 0
 		cardOffset.y += 35
-		cardOffset.x -= 2.5
+		cardOffset.x -= 3.5
 	pass
 
 func CanActivate(card : Card):
@@ -74,9 +74,11 @@ func CanActivate(card : Card):
 	else:
 		for number in CardHolder.get_child(0).GetAllowableNumbers(Card.CARD_POSITION.TOP):
 			allowedNumbers.append(number)
-		for number in CardHolder.get_child(get_child_count() -1).GetAllowableNumbers(Card.CARD_POSITION.BOTTOM):
+		for number in CardHolder.get_child(-1).GetAllowableNumbers(Card.CARD_POSITION.BOTTOM):
 			allowedNumbers.append(number)
 			
+	print(name + " activate check")
+	print(allowedNumbers)
 	if card.Rank in allowedNumbers:
 		return true
 		

@@ -1,10 +1,31 @@
-[gd_scene load_steps=3 format=3 uid="uid://dpx732ntvmqdr"]
+[gd_scene load_steps=6 format=3 uid="uid://dpx732ntvmqdr"]
 
 [ext_resource type="Texture2D" uid="uid://c1o382kisobmw" path="res://Art/Cards/InvestSlot.png" id="1_lqsov"]
 [ext_resource type="Script" path="res://Scripts/InvestSlot.gd" id="2_8133v"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aonxi"]
+bg_color = Color(0.996429, 0.849873, 0.323525, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bhsgv"]
+bg_color = Color(0.376878, 0.306001, 0.00762338, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_12mi8"]
+bg_color = Color(0.85098, 0.701961, 0.0352941, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
 [node name="InvestSlot" type="TextureRect"]
-custom_minimum_size = Vector2(135, 193)
+custom_minimum_size = Vector2(150, 193)
 texture = ExtResource("1_lqsov")
 expand_mode = 3
 stretch_mode = 5
@@ -12,23 +33,29 @@ script = ExtResource("2_8133v")
 
 [node name="Cards" type="Control" parent="."]
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 8.0
+offset_top = 1.0
+offset_right = 48.0
+offset_bottom = 41.0
 
 [node name="Button" type="Button" parent="."]
 visible = false
-custom_minimum_size = Vector2(155, 220)
+show_behind_parent = true
+custom_minimum_size = Vector2(160, 220)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -77.5
+offset_left = -80.0
 offset_top = -110.0
-offset_right = 77.5
+offset_right = 80.0
 offset_bottom = 110.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/hover = SubResource("StyleBoxFlat_aonxi")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_bhsgv")
+theme_override_styles/normal = SubResource("StyleBoxFlat_12mi8")
 
 [connection signal="button_up" from="Button" to="." method="_on_button_button_up"]

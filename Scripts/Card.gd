@@ -26,11 +26,12 @@ func ReverseFlip():
 	
 	
 	
-func Move(newPosition, speed = .1):
+func Move(newPosition, speed = .1, transType = Tween.TransitionType.TRANS_LINEAR):
 	var oldParent = get_parent()
 	reparent(Finder.GetDeadCardGroup())
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "global_position", newPosition, speed)
+	tween.set_trans(transType)
 	await tween.finished
 	MoveComplete.emit()
 	reparent(oldParent)
