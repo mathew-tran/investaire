@@ -97,18 +97,24 @@ pivot_offset = Vector2(65, 0)
 script = ExtResource("1_wkjp0")
 
 [node name="Front" type="TextureRect" parent="."]
+z_index = 2
+z_as_relative = false
 layout_mode = 0
 offset_right = 258.0
 offset_bottom = 373.0
 scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(2, 2)
 mouse_filter = 2
 texture = ExtResource("1_1awpt")
 
 [node name="Back" type="TextureRect" parent="."]
+z_index = 2
+z_as_relative = false
 layout_mode = 0
 offset_right = 256.0
 offset_bottom = 372.0
 scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(2, 2)
 mouse_filter = 2
 texture = ExtResource("2_shu33")
 
@@ -116,4 +122,4 @@ texture = ExtResource("2_shu33")
 libraries = {
 "": SubResource("AnimationLibrary_ymb0o")
 }
-speed_scale = 2.0
+speed_scale = 3.5

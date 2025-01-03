@@ -2,7 +2,7 @@ extends Control
 
 class_name Deck
 
-var Duplicates = 4
+var Duplicates = 5
 
 signal DeckCreated
 	
@@ -19,7 +19,7 @@ func CreateDeck():
 		instance.Rank = card
 		$Cards.add_child(instance)
 		instance.global_position = Vector2(-400, 0)
-		await instance.Move($Cards.global_position + cardOffset, randf_range(.1, .11))
+		await instance.Move($Cards.global_position + cardOffset, .08)
 		cardOffset += Vector2(-1,-1.2)
 	
 	DeckCreated.emit()
@@ -27,6 +27,6 @@ func CreateDeck():
 func DrawCard(newContainer):
 	var newCard = $Cards.get_child(len($Cards.get_children()) -1)
 	newCard.reparent(newContainer)
-	await newCard.Move(newContainer.global_position)
+	await newCard.Move(newContainer.global_position, .2)
 	newCard.Flip()
 	return newCard

@@ -1,33 +1,233 @@
-[gd_scene load_steps=6 format=3 uid="uid://cg224uu0mwtht"]
+[gd_scene load_steps=14 format=3 uid="uid://cg224uu0mwtht"]
 
 [ext_resource type="PackedScene" uid="uid://bqk8vp2wny8xq" path="res://Prefabs/BankSlots.tscn" id="1_48mkt"]
 [ext_resource type="PackedScene" uid="uid://cwv3t38xas85y" path="res://Prefabs/Deck.tscn" id="1_tu6hs"]
 [ext_resource type="Script" path="res://Scripts/Game.gd" id="1_v4ve5"]
+[ext_resource type="Texture2D" uid="uid://3b07akved7bo" path="res://Art/BG.png" id="2_154ev"]
 [ext_resource type="PackedScene" uid="uid://cdnnth03qc7fy" path="res://Prefabs/InvestSlots.tscn" id="2_y6qob"]
+[ext_resource type="Texture2D" uid="uid://coldidbsv5khu" path="res://Art/Cards/ScoredSlot.png" id="2_yf4c5"]
+[ext_resource type="Texture2D" uid="uid://bis3etxtpymhr" path="res://Art/BG2.png" id="3_5x0wh"]
 [ext_resource type="Texture2D" uid="uid://c3nf7b80kid8l" path="res://Art/Cards/PlaySlot.png" id="3_glwnt"]
+[ext_resource type="Texture2D" uid="uid://c8bma7oju6tav" path="res://Art/ScoredText.png" id="3_ibm0f"]
+[ext_resource type="Texture2D" uid="uid://c3m4x52kknprk" path="res://Art/ScoreBG.png" id="4_p18op"]
+[ext_resource type="Texture2D" uid="uid://dbmtm2q8f2nq1" path="res://Art/Title.png" id="4_x2xcn"]
+[ext_resource type="Texture2D" uid="uid://3n1f4pf7dr3j" path="res://Art/BG3.png" id="6_20m51"]
+[ext_resource type="Texture2D" uid="uid://belnqdl5gg2nx" path="res://Art/BG4.png" id="6_hod4n"]
 
 [node name="Game" type="Node2D"]
 position = Vector2(91, 204)
 script = ExtResource("1_v4ve5")
 
+[node name="ScoredSlot" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(133.5, 186.5)
+offset_left = 873.0
+offset_top = -184.0
+offset_right = 1073.0
+offset_bottom = 6.0
+texture = ExtResource("2_yf4c5")
+expand_mode = 2
+stretch_mode = 4
+metadata/_edit_group_ = true
+
+[node name="ScoredText" type="TextureRect" parent="ScoredSlot"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -45.0
+offset_top = 146.0
+offset_right = 238.0
+offset_bottom = 213.0
+grow_horizontal = 2
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_ibm0f")
+
+[node name="BG" type="TextureRect" parent="ScoredSlot"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -111.0
+offset_right = 125.0
+offset_bottom = 79.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_p18op")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="ScoredSlot"]
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 136.0
+theme_override_font_sizes/font_size = 80
+text = "192
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="."]
+show_behind_parent = true
+custom_minimum_size = Vector2(2560, 1080)
+offset_left = -103.0
+offset_top = -221.0
+offset_right = 2457.0
+offset_bottom = 1279.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_154ev")
+expand_mode = 2
+stretch_mode = 5
+metadata/_edit_lock_ = true
+
+[node name="TextureRect" type="TextureRect" parent="TextureRect"]
+show_behind_parent = true
+layout_mode = 0
+offset_right = 211.0
+offset_bottom = 1542.0
+texture = ExtResource("3_5x0wh")
+metadata/_edit_lock_ = true
+
+[node name="TextureRect5" type="TextureRect" parent="TextureRect"]
+show_behind_parent = true
+layout_mode = 0
+offset_left = -124.0
+offset_right = 87.0
+offset_bottom = 1542.0
+texture = ExtResource("6_hod4n")
+metadata/_edit_lock_ = true
+
+[node name="TextureRect8" type="TextureRect" parent="TextureRect"]
+show_behind_parent = true
+layout_mode = 0
+offset_left = -172.0
+offset_right = 39.0
+offset_bottom = 1542.0
+texture = ExtResource("3_5x0wh")
+metadata/_edit_lock_ = true
+
+[node name="TextureRect9" type="TextureRect" parent="TextureRect"]
+show_behind_parent = true
+layout_mode = 0
+offset_left = -210.0
+offset_right = 1.0
+offset_bottom = 1542.0
+texture = ExtResource("6_hod4n")
+metadata/_edit_lock_ = true
+
+[node name="TextureRect2" type="TextureRect" parent="TextureRect"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -211.0
+offset_top = -771.0
+offset_right = 46.0
+offset_bottom = 771.0
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("3_5x0wh")
+metadata/_edit_lock_ = true
+
+[node name="TextureRect4" type="TextureRect" parent="TextureRect"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -51.0
+offset_top = -771.0
+offset_right = 206.0
+offset_bottom = 771.0
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("6_20m51")
+metadata/_edit_lock_ = true
+
+[node name="TextureRect6" type="TextureRect" parent="TextureRect"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -770.0
+offset_right = 241.0
+offset_bottom = 772.0
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("3_5x0wh")
+metadata/_edit_lock_ = true
+
+[node name="TextureRect7" type="TextureRect" parent="TextureRect"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 16.0
+offset_top = -770.0
+offset_right = 273.0
+offset_bottom = 772.0
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("6_20m51")
+metadata/_edit_lock_ = true
+
+[node name="TextureRect3" type="TextureRect" parent="TextureRect"]
+layout_mode = 0
+offset_left = 188.0
+offset_top = 100.0
+offset_right = 698.0
+offset_bottom = 362.0
+texture = ExtResource("4_x2xcn")
+stretch_mode = 4
+metadata/_edit_lock_ = true
+
 [node name="BankSlots" parent="." instance=ExtResource("1_48mkt")]
+offset_left = 819.0
+offset_top = 59.0
+offset_right = 1644.0
+offset_bottom = 446.0
+alignment = 1
 
 [node name="InvestSlots" parent="." instance=ExtResource("2_y6qob")]
-offset_right = 1040.0
-offset_bottom = 401.0
+show_behind_parent = true
+offset_left = 102.0
+offset_top = 59.0
+offset_right = 839.0
+offset_bottom = 252.0
+alignment = 1
 
 [node name="PlaySlot" type="TextureRect" parent="."]
 show_behind_parent = true
-offset_left = 148.0
-offset_top = 208.0
-offset_right = 281.5
-offset_bottom = 394.0
+offset_left = 404.0
+offset_top = 389.0
+offset_right = 542.619
+offset_bottom = 579.0
+pivot_offset = Vector2(-10, -10)
 texture = ExtResource("3_glwnt")
 expand_mode = 3
 stretch_mode = 5
 
 [node name="Deck" parent="." instance=ExtResource("1_tu6hs")]
-offset_left = -3.0
-offset_top = 208.0
-offset_right = -3.0
-offset_bottom = 208.0
+offset_left = 959.0
+offset_top = 317.0
+offset_right = 959.0
+offset_bottom = 317.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(550, 157)
+zoom = Vector2(1.5, 1.5)
