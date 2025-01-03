@@ -2,8 +2,96 @@ extends TextureRect
 
 class_name InvestSlot
 
-func IsEmpty():
-	return get_child_count() == 0
+var bActivated = false
 
-func TakeCard(card):
-	card.reparent(self)
+@onready var CardHolder = $Cards
+
+var MaxCardAmount = 4
+
+func IsEmpty():
+	return CardHolder.get_child_count() == 0
+
+func TakeCard(card : Card):
+	var bMoveToTop = false
+	card.reparent(CardHolder)
+	await get_tree().process_frame
+	if len(CardHolder.get_children()) == 1:		
+		if card.Rank > CardHolder.get_child(0).Rank:
+			bMoveToTop = true
+		
+
+	elif len(CardHolder.get_children()) > 1:
+		if card.Rank in CardHolder.get_child(0).GetAllowableNumbers(Card.CARD_POSITION.TOP):
+			if card.Rank >= CardHolder.get_child(0).Rank:
+				bMoveToTop = true
+			
+			
+	if bMoveToTop:
+		CardHolder.move_child(card, 0)
+	else:
+		CardHolder.move_child(card, -1)
+			
+	await get_tree().process_frame
+	
+	await RepositionCards()	
+	if CardHolder.get_child_count() == 4:
+		await get_tree().create_timer(1).timeout
+		var deadCards = []
+		for deadcard in CardHolder.get_children():
+			deadCards.append(deadcard)
+		deadCards.reverse()
+		
+		for children in deadCards:
+			children.reparent(Finder.GetDeadCardGroup())
+			children.ReverseFlip()
+			await get_tree().create_timer(.8).timeout
+			await children.Move(Vector2(2500, 0), .2)
+			children.queue_free()
+	await get_tree().process_frame
+	
+func RepositionCards():
+	if CardHolder.get_child_count() < 2:
+		return
+	var cardOffset = Vector2.ZERO
+	var cards = CardHolder.get_children()
+	for card in cards:
+		if card.global_position != CardHolder.global_position + cardOffset:
+			await card.Move(CardHolder.global_position + cardOffset, .2)
+		card.z_index = 0
+		cardOffset.y += 35
+		cardOffset.x -= 2.5
+	pass
+
+func CanActivate(card : Card):
+	var allowedNumbers = []
+	
+	if CardHolder.get_child_count() == 0:
+		return false
+		
+	if CardHolder.get_child_count() == 1:
+		for number in CardHolder.get_child(0).GetAllowableNumbers(Card.CARD_POSITION.MIDDLE):
+			allowedNumbers.append(number)
+	else:
+		for number in CardHolder.get_child(0).GetAllowableNumbers(Card.CARD_POSITION.TOP):
+			allowedNumbers.append(number)
+		for number in CardHolder.get_child(get_child_count() -1).GetAllowableNumbers(Card.CARD_POSITION.BOTTOM):
+			allowedNumbers.append(number)
+			
+	if card.Rank in allowedNumbers:
+		return true
+		
+	return false
+	
+func GetHolder():
+	return CardHolder
+	
+func IsActive():
+	return bActivated
+	
+func SetActivated(bActive):
+	bActivated = bActive
+	$Button.visible = bActive
+
+
+func _on_button_button_up():
+	Finder.GetGame().OnSlotPressed(self)

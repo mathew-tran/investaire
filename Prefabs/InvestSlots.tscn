@@ -4,11 +4,12 @@
 [ext_resource type="Script" path="res://Scripts/InvestSlots.gd" id="1_s1byf"]
 
 [node name="InvestSlots" type="HBoxContainer"]
+custom_minimum_size = Vector2(745, 193)
 offset_left = 303.0
 offset_top = 208.0
-offset_right = 1654.0
-offset_bottom = 595.0
-theme_override_constants/separation = 9
+offset_right = 1718.0
+offset_bottom = 401.0
+theme_override_constants/separation = 20
 script = ExtResource("1_s1byf")
 
 [node name="InvestSlot" parent="." instance=ExtResource("1_kwndk")]

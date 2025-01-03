@@ -1,6 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://eop62t8g4wrm"]
+[gd_scene load_steps=3 format=3 uid="uid://bqk8vp2wny8xq"]
 
-[ext_resource type="Texture2D" uid="uid://c0adl0m2rjcdq" path="res://Art/Cards/BankSlot.png" id="1_w7fux"]
+[ext_resource type="Texture2D" uid="uid://c0adl0m2rjcdq" path="res://Art/Cards/BankSlot.png" id="1_2sjn1"]
+[ext_resource type="Script" path="res://Scripts/BankSlot.gd" id="2_lfcx2"]
 
 [node name="BankSlot" type="TextureRect"]
-texture = ExtResource("1_w7fux")
+offset_right = 92.4496
+offset_bottom = 134.0
+texture = ExtResource("1_2sjn1")
+expand_mode = 3
+stretch_mode = 5
+script = ExtResource("2_lfcx2")

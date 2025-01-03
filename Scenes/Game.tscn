@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://cg224uu0mwtht"]
 
-[ext_resource type="PackedScene" uid="uid://bqk8vp2wny8xq" path="res://Prefabs/BankSlots.tscn" id="1_48mkt"]
+[ext_resource type="PackedScene" uid="uid://bqk8vp2wny8xq" path="res://Prefabs/BankSlot.tscn" id="1_48mkt"]
 [ext_resource type="PackedScene" uid="uid://cwv3t38xas85y" path="res://Prefabs/Deck.tscn" id="1_tu6hs"]
 [ext_resource type="Script" path="res://Scripts/Game.gd" id="1_v4ve5"]
 [ext_resource type="Texture2D" uid="uid://3b07akved7bo" path="res://Art/BG.png" id="2_154ev"]
@@ -14,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://3n1f4pf7dr3j" path="res://Art/BG3.png" id="6_20m51"]
 [ext_resource type="Texture2D" uid="uid://belnqdl5gg2nx" path="res://Art/BG4.png" id="6_hod4n"]
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node2D" groups=["Game"]]
 position = Vector2(91, 204)
 script = ExtResource("1_v4ve5")
 
@@ -196,31 +196,18 @@ texture = ExtResource("4_x2xcn")
 stretch_mode = 4
 metadata/_edit_lock_ = true
 
-[node name="BankSlots" parent="." instance=ExtResource("1_48mkt")]
-offset_left = 819.0
-offset_top = 59.0
-offset_right = 1644.0
-offset_bottom = 446.0
-alignment = 1
+[node name="BankSlot" parent="." instance=ExtResource("1_48mkt")]
+offset_left = 928.0
+offset_top = 11.0
+offset_right = 1068.0
+offset_bottom = 201.0
 
 [node name="InvestSlots" parent="." instance=ExtResource("2_y6qob")]
-show_behind_parent = true
-offset_left = 102.0
-offset_top = 59.0
-offset_right = 839.0
-offset_bottom = 252.0
+offset_left = 7.0
+offset_top = 11.0
+offset_right = 762.0
+offset_bottom = 204.0
 alignment = 1
-
-[node name="PlaySlot" type="TextureRect" parent="."]
-show_behind_parent = true
-offset_left = 404.0
-offset_top = 389.0
-offset_right = 542.619
-offset_bottom = 579.0
-pivot_offset = Vector2(-10, -10)
-texture = ExtResource("3_glwnt")
-expand_mode = 3
-stretch_mode = 5
 
 [node name="Deck" parent="." instance=ExtResource("1_tu6hs")]
 offset_left = 959.0
@@ -231,3 +218,19 @@ offset_bottom = 317.0
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(550, 157)
 zoom = Vector2(1.5, 1.5)
+
+[node name="DeadCard" type="Control" parent="." groups=["DeadCard"]]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PlaySlot" type="TextureRect" parent="."]
+offset_left = 309.0
+offset_top = 389.0
+offset_right = 449.0
+offset_bottom = 579.0
+pivot_offset = Vector2(-10, -10)
+texture = ExtResource("3_glwnt")
+expand_mode = 3
+stretch_mode = 5

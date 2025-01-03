@@ -13,6 +13,7 @@ func CreateDeck():
 			data.append(x)
 	data.shuffle()
 	
+	var index = 100
 	var cardOffset = Vector2.ZERO
 	for card in data:
 		var instance = load("res://Prefabs/Card.tscn").instantiate()		
@@ -30,3 +31,6 @@ func DrawCard(newContainer):
 	await newCard.Move(newContainer.global_position, .2)
 	newCard.Flip()
 	return newCard
+
+func IsEmpty():
+	return len($Cards.get_children()) == 0
