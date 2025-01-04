@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://2716lq2baj5t"]
+[gd_scene load_steps=10 format=3 uid="uid://2716lq2baj5t"]
 
 [ext_resource type="Script" path="res://Scripts/PlayAgainButton.gd" id="1_4bf7n"]
 [ext_resource type="Script" path="res://Scripts/GameOverScreen.gd" id="1_bywir"]
+[ext_resource type="PackedScene" uid="uid://cy83vnwlyfejc" path="res://Prefabs/ClearButton.tscn" id="3_x3vvl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_785cl"]
 bg_color = Color(0.0745098, 0.101961, 0.211765, 1)
@@ -180,5 +181,12 @@ theme_override_font_sizes/font_size = 50
 theme_override_styles/normal = SubResource("StyleBoxFlat_at6oo")
 text = "PLAY AGAIN"
 script = ExtResource("1_4bf7n")
+
+[node name="Clear" parent="." instance=ExtResource("3_x3vvl")]
+layout_mode = 0
+offset_left = 66.0
+offset_top = 873.0
+offset_right = 366.0
+offset_bottom = 1073.0
 
 [connection signal="button_up" from="VBoxContainer/HBoxContainer2/PlayAgainButton" to="VBoxContainer/HBoxContainer2/PlayAgainButton" method="_on_button_up"]

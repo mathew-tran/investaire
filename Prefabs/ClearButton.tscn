@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=3 uid="uid://cy83vnwlyfejc"]
+
+[ext_resource type="Script" path="res://Scripts/ClearButton.gd" id="1_i78xe"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mubye"]
+bg_color = Color(0.975832, 0.427818, 0.393933, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mqmvo"]
+bg_color = Color(0.363402, 0.0465427, 0.0537067, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fek3o"]
+bg_color = Color(0.929412, 0.231373, 0.231373, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x1ml4"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cg1qj"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="Clear" type="Button"]
+custom_minimum_size = Vector2(300, 100)
+offset_right = 200.0
+offset_bottom = 200.0
+theme_override_font_sizes/font_size = 40
+theme_override_styles/hover = SubResource("StyleBoxFlat_mubye")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_mqmvo")
+theme_override_styles/normal = SubResource("StyleBoxFlat_fek3o")
+text = "CLEAR DATA"
+script = ExtResource("1_i78xe")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = -46.0
+offset_bottom = -1.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_x1ml4")
+theme_override_styles/fill = SubResource("StyleBoxFlat_cg1qj")
+value = 50.0
+show_percentage = false
+
+[connection signal="button_down" from="." to="." method="_on_button_down"]
+[connection signal="button_up" from="." to="." method="_on_button_up"]

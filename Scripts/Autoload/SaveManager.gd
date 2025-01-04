@@ -12,6 +12,10 @@ func SaveData():
 func SaveVar(category, value):
 	Data[category] = value
 	
+func ClearData():
+	Data.clear()
+	SaveData()
+	
 func LoadVar(category):
 	if Data.has(category):
 		return Data[category]

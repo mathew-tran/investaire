@@ -17,6 +17,13 @@ enum KILL_REASON {
 	DEFAULT,
 	BANK
 }
+
+enum MOVE_TYPE {
+	REPOSITION,
+	PLACE,
+	COMPLETE,
+	BANK
+}
 func _ready():
 	Create()
 	
@@ -55,14 +62,14 @@ func Kill(killReason = KILL_REASON.DEFAULT):
 	$PointsLabel.visible = false
 	ReverseFlip()
 	await get_tree().create_timer(.5).timeout
-	await Move(Vector2(2200, -100), .1, Tween.TransitionType.TRANS_CUBIC)
+	await Move(Vector2(2200, -100), .1, Tween.TransitionType.TRANS_CUBIC, MOVE_TYPE.COMPLETE)
 
 	
 	queue_free()
 	
 	
 	
-func Move(newPosition, speed = .1, transType = Tween.TransitionType.TRANS_LINEAR):
+func Move(newPosition, speed = .1, transType = Tween.TransitionType.TRANS_LINEAR, moveType = MOVE_TYPE.PLACE):
 	var oldParent = get_parent()
 	reparent(Finder.GetDeadCardGroup())
 	var tween = get_tree().create_tween()
@@ -71,6 +78,16 @@ func Move(newPosition, speed = .1, transType = Tween.TransitionType.TRANS_LINEAR
 	await tween.finished
 	MoveComplete.emit()
 	reparent(oldParent)
+	
+	match moveType:
+		MOVE_TYPE.PLACE:
+			Finder.GetSFXManager().PlaySound("res://Audio/card-place-1.ogg")
+		MOVE_TYPE.REPOSITION:
+			Finder.GetSFXManager().PlaySound("res://Audio/card-place-4.ogg")
+		MOVE_TYPE.BANK:	
+			Finder.GetSFXManager().PlaySound("res://Audio/card-slide-2.ogg")
+		MOVE_TYPE.COMPLETE:	
+			Finder.GetSFXManager().PlaySound("res://Audio/card-slide-8.ogg")
 	await get_tree().process_frame
 
 func GetAllowableNumbers(cardPosition: CARD_POSITION):

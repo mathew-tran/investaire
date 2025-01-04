@@ -61,9 +61,9 @@ func RepositionCards():
 	await get_tree().create_timer(.1).timeout
 	var cards = CardHolder.get_children()
 	for card in cards:
-		await card.Move(CardHolder.global_position + cardOffset, .01, Tween.TransitionType.TRANS_QUAD)
+		await card.Move(CardHolder.global_position + cardOffset, .01, Tween.TransitionType.TRANS_QUAD, Card.MOVE_TYPE.REPOSITION)
 		cardOffset.y += 55
-		cardOffset.x -= 7.5
+		#cardOffset.x -= 7.5
 	pass
 
 func CanActivate(card : Card):

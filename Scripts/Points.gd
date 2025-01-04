@@ -17,4 +17,5 @@ func IncrementTotal():
 	await get_tree().create_timer(.01).timeout
 	Total += 1
 	text = str(Total)
+	Finder.GetSFXManager().PlayChips()
 	

@@ -11,3 +11,9 @@ func GetDeadCardGroup():
 	if result:
 		return result[0]
 	return null
+
+func GetSFXManager() -> SFXManager:
+	var result = get_tree().get_nodes_in_group("SFXManager")	
+	if result:
+		return result[0]
+	return null

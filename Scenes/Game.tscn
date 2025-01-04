@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cg224uu0mwtht"]
+[gd_scene load_steps=22 format=3 uid="uid://cg224uu0mwtht"]
 
 [ext_resource type="PackedScene" uid="uid://bqk8vp2wny8xq" path="res://Prefabs/BankSlot.tscn" id="1_48mkt"]
 [ext_resource type="PackedScene" uid="uid://cwv3t38xas85y" path="res://Prefabs/Deck.tscn" id="1_tu6hs"]
@@ -17,6 +17,10 @@
 [ext_resource type="Script" path="res://Scripts/EndOfGameReason.gd" id="15_be3id"]
 [ext_resource type="PackedScene" uid="uid://2716lq2baj5t" path="res://Prefabs/GameOverScreen.tscn" id="15_dq3aa"]
 [ext_resource type="PackedScene" uid="uid://b18oduhmhyqwf" path="res://Prefabs/ResetButton.tscn" id="17_8bkcj"]
+[ext_resource type="Script" path="res://Scripts/SFXManager.gd" id="18_gexie"]
+[ext_resource type="AudioStream" uid="uid://d2i8jb21nmcv5" path="res://Audio/chips-collide-1.ogg" id="19_o6bqc"]
+[ext_resource type="Texture2D" uid="uid://c0ikyo1tvukc4" path="res://Art/Icon.png" id="20_ijymy"]
+[ext_resource type="Texture2D" uid="uid://dyer8v6reqkrq" path="res://Art/InvestSlotLight.png" id="21_euqfi"]
 
 [node name="Game" type="Node2D" groups=["Game"]]
 position = Vector2(91, 204)
@@ -200,13 +204,12 @@ metadata/_edit_lock_ = true
 
 [node name="TextureRect3" type="TextureRect" parent="TextureRect"]
 layout_mode = 0
-offset_left = 188.0
-offset_top = 100.0
-offset_right = 698.0
-offset_bottom = 362.0
+offset_left = 458.667
+offset_top = 37.3333
+offset_right = 968.667
+offset_bottom = 299.333
 texture = ExtResource("4_x2xcn")
 stretch_mode = 4
-metadata/_edit_lock_ = true
 
 [node name="BankSlot" parent="." instance=ExtResource("1_48mkt")]
 offset_left = 1113.0
@@ -217,9 +220,9 @@ scale = Vector2(1.5, 1.5)
 
 [node name="InvestSlots" parent="." instance=ExtResource("2_y6qob")]
 offset_left = -266.0
-offset_top = -76.0
-offset_right = 564.0
-offset_bottom = 117.0
+offset_top = -63.0
+offset_right = 604.0
+offset_bottom = 130.0
 scale = Vector2(1.5, 1.5)
 alignment = 1
 
@@ -235,10 +238,10 @@ position = Vector2(550, 157)
 metadata/_edit_lock_ = true
 
 [node name="PlaySlot" type="TextureRect" parent="."]
-offset_left = 253.0
-offset_top = 471.0
-offset_right = 393.0
-offset_bottom = 661.0
+offset_left = 282.0
+offset_top = 491.0
+offset_right = 422.0
+offset_bottom = 681.0
 scale = Vector2(1.5, 1.5)
 pivot_offset = Vector2(-10, -10)
 texture = ExtResource("3_glwnt")
@@ -269,6 +272,11 @@ offset_bottom = 150.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(400, 150)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 9
+theme_override_constants/shadow_offset_y = 11
+theme_override_constants/outline_size = 15
 theme_override_font_sizes/font_size = 80
 text = "BANKRUPT"
 horizontal_alignment = 1
@@ -280,7 +288,7 @@ visible = false
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 color = Color(0, 0.497285, 0.551219, 1)
-energy = 0.7
+energy = 0.38
 blend_mode = 2
 
 [node name="ResetButton" parent="." instance=ExtResource("17_8bkcj")]
@@ -288,3 +296,32 @@ offset_left = -306.0
 offset_top = 521.0
 offset_right = -106.0
 offset_bottom = 721.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." groups=["SFXManager"]]
+volume_db = -5.0
+script = ExtResource("18_gexie")
+
+[node name="Points" type="AudioStreamPlayer" parent="AudioStreamPlayer"]
+stream = ExtResource("19_o6bqc")
+volume_db = -5.0
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+offset_left = -285.0
+offset_top = -365.0
+offset_right = -89.0
+offset_bottom = -114.0
+texture = ExtResource("20_ijymy")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+show_behind_parent = true
+position = Vector2(391.5, 637.12)
+scale = Vector2(0.820225, 0.806824)
+blend_mode = 2
+texture = ExtResource("21_euqfi")
+
+[node name="PointLight2D2" type="PointLight2D" parent="."]
+show_behind_parent = true
+position = Vector2(1240, -249.5)
+scale = Vector2(1.01873, 0.540052)
+blend_mode = 2
+texture = ExtResource("21_euqfi")

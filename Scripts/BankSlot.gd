@@ -56,7 +56,7 @@ func RepositionCards():
 	var speed = .08 / CardHolder.get_child_count()
 	var cards = CardHolder.get_children()
 	for card in cards:		
-		await card.Move(CardHolder.global_position + cardOffset, speed, Tween.TransitionType.TRANS_QUAD)
+		await card.Move(CardHolder.global_position + cardOffset, speed, Tween.TransitionType.TRANS_QUAD, Card.MOVE_TYPE.BANK)
 		cardOffset.y += 60
 
 	pass

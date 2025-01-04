@@ -33,7 +33,7 @@ func CreateDeck():
 		$Cards.add_child(instance)
 		instance.global_position = Vector2(-400, 0)
 		await instance.Move($Cards.global_position + cardOffset, splice)
-		cardOffset += Vector2(-2,-1.2)
+		cardOffset += Vector2(-1,-1.0)
 	
 	DeckCreated.emit()
 

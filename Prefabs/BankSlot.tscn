@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bqk8vp2wny8xq"]
+[gd_scene load_steps=4 format=3 uid="uid://bqk8vp2wny8xq"]
 
 [ext_resource type="Texture2D" uid="uid://c0adl0m2rjcdq" path="res://Art/Cards/BankSlot.png" id="1_2sjn1"]
 [ext_resource type="Script" path="res://Scripts/BankSlot.gd" id="2_lfcx2"]
+[ext_resource type="Texture2D" uid="uid://dyer8v6reqkrq" path="res://Art/InvestSlotLight.png" id="3_1n14l"]
 
 [node name="BankSlot" type="TextureRect"]
 custom_minimum_size = Vector2(182, 218)
@@ -18,3 +19,10 @@ offset_left = 26.0
 offset_top = 16.0
 offset_right = 66.0
 offset_bottom = 56.0
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+show_behind_parent = true
+position = Vector2(90, 131.759)
+scale = Vector2(0.6, 0.745432)
+blend_mode = 2
+texture = ExtResource("3_1n14l")
