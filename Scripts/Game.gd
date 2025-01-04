@@ -42,7 +42,7 @@ func _ready():
 	await get_tree().create_timer(1.0).timeout
 		
 	
-	$CanvasLayer/GameOver.Show()
+	$CanvasLayer/GameOver.Show(Points)
 
 func KillGame():
 	bIsGameOver = true

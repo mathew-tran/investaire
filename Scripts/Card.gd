@@ -3,6 +3,7 @@ extends Button
 class_name Card
 
 var Rank = 0
+var bIsRed = true
 
 signal MoveComplete
 
@@ -20,7 +21,10 @@ func _ready():
 	Create()
 	
 func Create():
-	var image = "res://Art/Cards/" + str(Rank) + ".png"
+	var image = "res://Art/Cards/" + str(Rank) 
+	if bIsRed == false:
+		image += "b"
+	image += ".png"
 	$Front.texture = load(image)
 	
 func Flip():
@@ -30,6 +34,16 @@ func ReverseFlip():
 	$AnimationPlayer.play("FlipBack", -1, 4.8)
 	
 func Kill(killReason = KILL_REASON.DEFAULT):
+	var pointAmount = Rank
+	if Rank == 0:
+		pointAmount += 11
+	if killReason == KILL_REASON.BANK:
+		pointAmount *= 3
+		
+	$PointsLabel.text = "+" + str(pointAmount)
+	$PointsLabel.visible = true
+
+	Finder.GetGame().GainPoints(pointAmount)
 	reparent(Finder.GetDeadCardGroup())
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "scale", Vector2.ONE * 1.5, .1)
@@ -38,17 +52,12 @@ func Kill(killReason = KILL_REASON.DEFAULT):
 	tween = get_tree().create_tween()
 	tween.tween_property(self, "scale", Vector2.ONE, .05)
 	await tween.finished
-	
+	$PointsLabel.visible = false
 	ReverseFlip()
 	await get_tree().create_timer(.5).timeout
 	await Move(Vector2(2200, -100), .1, Tween.TransitionType.TRANS_CUBIC)
-	var pointAmount = Rank
-	if Rank == 0:
-		pointAmount += 10
-		
-	if killReason == KILL_REASON.BANK:
-		pointAmount *= 3
-	Finder.GetGame().GainPoints(pointAmount)
+
+	
 	queue_free()
 	
 	
@@ -67,7 +76,7 @@ func Move(newPosition, speed = .1, transType = Tween.TransitionType.TRANS_LINEAR
 func GetAllowableNumbers(cardPosition: CARD_POSITION):
 	var allowedNumbers = []
 	allowedNumbers.append(Rank)
-	if Rank < 9 and (cardPosition == CARD_POSITION.TOP or cardPosition == CARD_POSITION.MIDDLE):
+	if Rank < 10 and (cardPosition == CARD_POSITION.TOP or cardPosition == CARD_POSITION.MIDDLE):
 		allowedNumbers.append(Rank + 1)
 	if Rank >= 1 and (cardPosition == CARD_POSITION.BOTTOM or cardPosition == CARD_POSITION.MIDDLE):
 		allowedNumbers.append(Rank - 1)

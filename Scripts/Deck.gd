@@ -2,25 +2,41 @@ extends Control
 
 class_name Deck
 
-var Duplicates = 5
+var Duplicates = 4
 
 signal DeckCreated
 	
 func CreateDeck():
 	var data = []
+	var bIsRed = false
+	var halfAmount = Duplicates / 2
 	for dupe in Duplicates:
-		for x in range(0, 9):
-			data.append(x)
+		for x in range(0, 11):
+			var instanceData = {
+				"Rank" : x,
+				"bIsRed" : bIsRed
+			}
+			data.append(instanceData)
+		halfAmount -= 1
+		if halfAmount == 0:
+			bIsRed = true
 	data.shuffle()
 	
+	print(data)
+	
 	var cardOffset = Vector2.ZERO
+	var timeToCreateDeck = 3.2
+	
+	var splice = timeToCreateDeck / float(data.size())
+	print(splice)
 	for card in data:
 		var instance = load("res://Prefabs/Card.tscn").instantiate()		
-		instance.Rank = card
+		instance.Rank = card["Rank"]
+		instance.bIsRed = card["bIsRed"]
 		$Cards.add_child(instance)
 		instance.global_position = Vector2(-400, 0)
-		await instance.Move($Cards.global_position + cardOffset, .05)
-		cardOffset += Vector2(-1,-1.2)
+		await instance.Move($Cards.global_position + cardOffset, splice)
+		cardOffset += Vector2(-2,-1.2)
 	
 	DeckCreated.emit()
 

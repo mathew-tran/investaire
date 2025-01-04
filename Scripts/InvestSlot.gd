@@ -35,8 +35,10 @@ func CompareCards(cardA : Card, cardB : Card):
 func TakeCard(card : Card):
 	var bMoveToTop = false
 	card.reparent(CardHolder)
-	card.visible = false
+	card.visible = true
 	await CardHolder.NOTIFICATION_CHILD_ORDER_CHANGED
+	await card.Move(CardHolder.global_position)
+	card.visible = false
 	await SortCards()	
 	await RepositionCards()	
 	card.visible = true
@@ -52,15 +54,13 @@ func TakeCard(card : Card):
 			await CardHolder.NOTIFICATION_CHILD_ORDER_CHANGED
 	
 func RepositionCards():
-	if CardHolder.get_child_count() < 2:
-		return
 	var cardOffset = Vector2.ZERO
 	await get_tree().create_timer(.1).timeout
 	var cards = CardHolder.get_children()
 	for card in cards:
 		await card.Move(CardHolder.global_position + cardOffset, .01, Tween.TransitionType.TRANS_QUAD)
 		cardOffset.y += 55
-		cardOffset.x -= 3.5
+		cardOffset.x -= 7.5
 	pass
 
 func CanActivate(card : Card):

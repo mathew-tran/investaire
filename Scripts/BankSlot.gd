@@ -9,13 +9,13 @@ func TakeCard(card : Card):
 	await SortCards()
 	await RepositionCards()
 	await CheckDupes()
-	await RepositionCards()
 	await get_tree().process_frame
+	await RepositionCards()
 	if len(CardHolder.get_children()) >= 3:
 		Finder.GetGame().KillGame()
 	
 func CompareCards(cardA : Card, cardB : Card):
-	if cardA.Rank <= cardB.Rank:
+	if cardA.Rank >= cardB.Rank:
 		return true
 	return false
 	
@@ -41,8 +41,9 @@ func CheckDupes():
 		if values.has(str(card.Rank)) == false:
 			values[str(card.Rank)] = card
 		else:
-			await card.Kill(Card.KILL_REASON.BANK)
+			await get_tree().create_timer(.1).timeout
 			await values[str(card.Rank)].Kill(Card.KILL_REASON.BANK)	
+			await card.Kill(Card.KILL_REASON.BANK)
 			await CardHolder.NOTIFICATION_CHILD_ORDER_CHANGED
 			return
 	
@@ -50,20 +51,12 @@ func CheckBankrupt():
 	pass
 
 func RepositionCards():
-	if CardHolder.get_child_count() == 0:
-		return
-	if CardHolder.get_child_count() == 1:
-		await CardHolder.get_child(0).Move(CardHolder.global_position + Vector2(30.5, 0), .1, Tween.TransitionType.TRANS_QUAD)
-		return
+	await get_tree().create_timer(.1).timeout
 	var cardOffset = Vector2.ZERO
-	var startPosition = CardHolder.global_position + Vector2(30.5, 0)
-	print(startPosition)
 	var speed = .08 / CardHolder.get_child_count()
 	var cards = CardHolder.get_children()
 	for card in cards:		
-		card.z_index = 0
-		cardOffset.x -= 25.5
-		if card.global_position != CardHolder.global_position + cardOffset:
-			await card.Move(startPosition + cardOffset, speed, Tween.TransitionType.TRANS_QUAD)
-		#cardOffset.y -= 5.5
+		await card.Move(CardHolder.global_position + cardOffset, speed, Tween.TransitionType.TRANS_QUAD)
+		cardOffset.y += 60
+
 	pass
