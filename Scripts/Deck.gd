@@ -22,13 +22,10 @@ func CreateDeck():
 			bIsRed = true
 	data.shuffle()
 	
-	print(data)
-	
 	var cardOffset = Vector2.ZERO
 	var timeToCreateDeck = 3.2
 	
 	var splice = timeToCreateDeck / float(data.size())
-	print(splice)
 	for card in data:
 		var instance = load("res://Prefabs/Card.tscn").instantiate()		
 		instance.Rank = card["Rank"]

@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=3 uid="uid://b18oduhmhyqwf"]
+
+[ext_resource type="Script" path="res://Scripts/ResetButton.gd" id="1_gome3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bvt43"]
+bg_color = Color(0.269831, 0.335431, 0.589897, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v0x52"]
+bg_color = Color(0.0278002, 0.0439831, 0.113449, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ubjde"]
+bg_color = Color(0.0745098, 0.101961, 0.211765, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x1ml4"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cg1qj"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="ResetButton" type="Button"]
+custom_minimum_size = Vector2(200, 100)
+offset_right = 200.0
+offset_bottom = 200.0
+theme_override_font_sizes/font_size = 40
+theme_override_styles/hover = SubResource("StyleBoxFlat_bvt43")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_v0x52")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ubjde")
+text = "RESET"
+script = ExtResource("1_gome3")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = -46.0
+offset_bottom = -1.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_x1ml4")
+theme_override_styles/fill = SubResource("StyleBoxFlat_cg1qj")
+value = 50.0
+show_percentage = false
+
+[connection signal="button_down" from="." to="." method="_on_button_down"]
+[connection signal="button_up" from="." to="." method="_on_button_up"]

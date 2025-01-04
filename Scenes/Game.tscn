@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cg224uu0mwtht"]
+[gd_scene load_steps=18 format=3 uid="uid://cg224uu0mwtht"]
 
 [ext_resource type="PackedScene" uid="uid://bqk8vp2wny8xq" path="res://Prefabs/BankSlot.tscn" id="1_48mkt"]
 [ext_resource type="PackedScene" uid="uid://cwv3t38xas85y" path="res://Prefabs/Deck.tscn" id="1_tu6hs"]
@@ -14,7 +14,9 @@
 [ext_resource type="Script" path="res://Scripts/Points.gd" id="5_jxug2"]
 [ext_resource type="Texture2D" uid="uid://3n1f4pf7dr3j" path="res://Art/BG3.png" id="6_20m51"]
 [ext_resource type="Texture2D" uid="uid://belnqdl5gg2nx" path="res://Art/BG4.png" id="6_hod4n"]
+[ext_resource type="Script" path="res://Scripts/EndOfGameReason.gd" id="15_be3id"]
 [ext_resource type="PackedScene" uid="uid://2716lq2baj5t" path="res://Prefabs/GameOverScreen.tscn" id="15_dq3aa"]
+[ext_resource type="PackedScene" uid="uid://b18oduhmhyqwf" path="res://Prefabs/ResetButton.tscn" id="17_8bkcj"]
 
 [node name="Game" type="Node2D" groups=["Game"]]
 position = Vector2(91, 204)
@@ -252,5 +254,37 @@ scale = Vector2(1.5, 1.5)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="EndOfGameReason" type="Label" parent="CanvasLayer"]
+visible = false
+custom_minimum_size = Vector2(400, 300)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -150.0
+offset_right = 400.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(400, 150)
+theme_override_font_sizes/font_size = 80
+text = "BANKRUPT"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("15_be3id")
+
 [node name="GameOver" parent="CanvasLayer" instance=ExtResource("15_dq3aa")]
 visible = false
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+color = Color(0, 0.497285, 0.551219, 1)
+energy = 0.7
+blend_mode = 2
+
+[node name="ResetButton" parent="." instance=ExtResource("17_8bkcj")]
+offset_left = -306.0
+offset_top = 521.0
+offset_right = -106.0
+offset_bottom = 721.0

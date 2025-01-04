@@ -7,7 +7,6 @@ signal FinishInvestSlotUpdate
 func AreSlotsVacant():
 	for slot in get_children():
 		if slot.IsEmpty():
-			print(slot.name + " is empty")
 			return true
 	return false
 

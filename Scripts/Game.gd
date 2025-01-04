@@ -22,6 +22,15 @@ signal PointsGained(amount)
 var bIsGameOver = false
 
 func _ready():
+	SaveManager.LoadData()
+	
+	if SaveManager.LoadVar("HIGH_SCORE"):
+		$CanvasLayer/GameOver.SetHighScore(SaveManager.LoadVar("HIGH_SCORE"))
+	else:
+		$CanvasLayer/GameOver.SetHighScore(100)
+		SaveManager.SaveVar("HIGH_SCORE", 100)
+		SaveManager.SaveData()
+	
 	await $Deck.CreateDeck()
 	print("ready")
 	
@@ -41,9 +50,44 @@ func _ready():
 		
 	await get_tree().create_timer(1.0).timeout
 		
+	var reason = "BANKRUPT!"
+	if $Deck.IsEmpty():
+		reason = "ROUND OVER"
+		
+		
+	await $CanvasLayer/EndOfGameReason.TellReason(reason)
+	
+	if $Deck.IsEmpty():
+		GainPoints(100)
+		await $ScoredSlot/Points.PointAddComplete
+		
+	await get_tree().create_timer(1).timeout
 	
 	$CanvasLayer/GameOver.Show(Points)
+	
 
+
+func _input(event):
+	if bIsGameOver:
+		return
+		
+	if $PlaySlot.get_child_count() == 0:
+		return
+		
+	if is_instance_valid(GetPlayCard()) == false:
+		return
+		
+	if Input.is_action_just_pressed("slot_1"):
+		$InvestSlots.get_child(0).Click()
+	if Input.is_action_just_pressed("slot_2"):
+		$InvestSlots.get_child(1).Click()
+	if Input.is_action_just_pressed("slot_3"):
+		$InvestSlots.get_child(2).Click()
+	if Input.is_action_just_pressed("slot_4"):
+		$InvestSlots.get_child(3).Click()
+	if Input.is_action_just_pressed("slot_5"):
+		$InvestSlots.get_child(4).Click()
+		
 func KillGame():
 	bIsGameOver = true
 	$InvestSlots.DisableSlots()	

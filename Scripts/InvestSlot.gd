@@ -33,6 +33,9 @@ func CompareCards(cardA : Card, cardB : Card):
 	return false
 	
 func TakeCard(card : Card):
+	if CanActivate(card) == false:
+		return
+		
 	var bMoveToTop = false
 	card.reparent(CardHolder)
 	card.visible = true
@@ -78,8 +81,6 @@ func CanActivate(card : Card):
 		for number in CardHolder.get_child(-1).GetAllowableNumbers(Card.CARD_POSITION.BOTTOM):
 			allowedNumbers.append(number)
 			
-	print(name + " activate check")
-	print(allowedNumbers)
 	if card.Rank in allowedNumbers:
 		return true
 		
@@ -97,4 +98,8 @@ func SetActivated(bActive):
 
 
 func _on_button_button_up():
-	Finder.GetGame().OnSlotPressed(self)
+	Click()
+
+func Click():
+	if CanActivate(Finder.GetGame().GetPlayCard()):
+		Finder.GetGame().OnSlotPressed(self)
